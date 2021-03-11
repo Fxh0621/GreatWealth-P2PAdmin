@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.igeek.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.igeek.entity.User" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phoneNum" property="phonenum" jdbcType="VARCHAR" />
+    <result column="personId" property="personid" jdbcType="VARCHAR" />
+    <result column="registerTime" property="registertime" jdbcType="DATE" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="headerPic" property="headerpic" jdbcType="VARCHAR" />
+    <result column="investAllInterest" property="investallinterest" jdbcType="DOUBLE" />
+    <result column="borrowAllInterest" property="borrowallinterest" jdbcType="DOUBLE" />
+  </resultMap>
+  
+  <resultMap id="UserInvest" type="com.igeek.entity.Userinvest">
+    <result column="userId" property="userid" />
+    <result column="headerPic" property="headerpic" />
+    <result column="username" property="username" />
+    <result column="phoneNum" property="phonenum" />
+    <result column="personId" property="personid" />
+    <result column="investIntime" property="investintime" />
+    <result column="investProject" property="investproject" />
+    <result column="investType" property="investtype" />
+    <result column="investMoney" property="investmoney" />
+  </resultMap>
+
+  <resultMap id="UserBorrow" type="com.igeek.entity.Userborrow">
+    <result column="userId" property="userid" />
+    <result column="headerPic" property="headerpic" />
+    <result column="username" property="username" />
+    <result column="phoneNum" property="phonenum" />
+    <result column="personId" property="personid" />
+    <result column="borrowTime" property="borrowtime" />
+    <result column="borrowProject" property="borrowproject" />
+    <result column="borrowType" property="borrowtype" />
+    <result column="borrowMoney" property="borrowmoney" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.igeek.entity.User" >
+    insert into user (userId, username, password, 
+      phoneNum, personId, registerTime, 
+      balance, headerPic, investAllInterest, 
+      borrowAllInterest)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phonenum,jdbcType=VARCHAR}, #{personid,jdbcType=VARCHAR}, #{registertime,jdbcType=DATE}, 
+      #{balance,jdbcType=DOUBLE}, #{headerpic,jdbcType=VARCHAR}, #{investallinterest,jdbcType=DOUBLE}, 
+      #{borrowallinterest,jdbcType=DOUBLE})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.igeek.entity.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phoneNum = #{phonenum,jdbcType=VARCHAR},
+      personId = #{personid,jdbcType=VARCHAR},
+      registerTime = #{registertime,jdbcType=DATE},
+      balance = #{balance,jdbcType=DOUBLE},
+      headerPic = #{headerpic,jdbcType=VARCHAR},
+      investAllInterest = #{investallinterest,jdbcType=DOUBLE},
+      borrowAllInterest = #{borrowallinterest,jdbcType=DOUBLE}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select userId, username, password, phoneNum, personId, registerTime, balance, headerPic, 
+    investAllInterest, borrowAllInterest
+    from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select userId, username, password, phoneNum, personId, registerTime, balance, headerPic, 
+    investAllInterest, borrowAllInterest
+    from user
+  </select>
+  <select id="selectInvest" resultMap="UserInvest">
+    select u.userId,u.headerPic,u.username,u.phoneNum,u.personId,iv.investInTime,it.investProject,it.investType,iv.investMoney
+    from (user u right join invest iv on u.userId = iv.userId)
+    left JOIN investtypes it on iv.investTypesId = it.investTypesId
+  </select>
+
+  <select id="selectBorrow" resultMap="UserBorrow">
+     select u.userId,u.headerPic,u.username,u.phoneNum,u.personId,bw.borrowTime,bt.borrowProject,bt.borrowType,bw.borrowMoney
+     from (user u right join borrow bw on u.userId = bw.userId)
+     right JOIN borrowtypes bt on bw.borrowTypesId = bt.borrowTypesId
+  </select>
+</mapper>
