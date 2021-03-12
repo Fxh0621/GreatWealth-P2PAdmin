@@ -272,8 +272,8 @@
                       },
                       btnAlign: 'c',
                       success: function (layero, index) {//页面弹出成功触发
-                          //为form表达赋值
 
+                          //为form表达赋值
                           form.val("editGoodsForm", {
                               //键值对的形式赋值
                               'id': data.id,
@@ -281,6 +281,7 @@
                               'username': data.username,
                               'password': data.password
                           });
+
                           //重新渲染select
 
                           form.render();
@@ -290,8 +291,9 @@
                           form.on("submit(submitFormFilter)", function (d) {
                               // console.log(d);
                               // console.log(d.field);
+                              //alert(d.field);
                               var id = data.id;   //获取用户id
-                              $.post("/updateAdmin?id=" + id, function (rs) {
+                              $.post("/updateAdmin?id="+id,d.field,function (rs) {
                                   //业务正常
                                   if (rs.code == 200) {
                                       layer.msg("更新成功");
@@ -359,8 +361,10 @@
 
                           //为表单新增监听提交事件
                           form.on("submit(submitFormFilter)", function (d) {
+                              //alert(d.field.username);
                               $.post("/addNewAdmin", d.field, function (rs) {
                                   //业务正常
+
                                   if (rs.code == 200) {
                                       layer.msg("新增成功");
                                       $("#searchBtn").click();
@@ -383,7 +387,7 @@
       </script>
 
 
-      <script type="text/javascript">
+      <script type="text/javascript"e>
           //上传头像的功能
           function showPreview(source) {
               var file = source.files[0];
