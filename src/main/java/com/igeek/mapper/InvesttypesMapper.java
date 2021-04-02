@@ -13,4 +13,5 @@ public interface InvesttypesMapper {
     List<Investtypes> selectAll();
 
     int updateByPrimaryKey(Investtypes record);
+
 }

@@ -39,4 +39,5 @@
     select investTypesId, investProject, investType, investRate, investTimeType, lessInvestMoney
     from investtypes
   </select>
+
 </mapper>

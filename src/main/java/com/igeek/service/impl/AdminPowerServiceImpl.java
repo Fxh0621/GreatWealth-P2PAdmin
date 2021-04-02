@@ -27,6 +27,9 @@ public class AdminPowerServiceImpl implements AdminPowerService {
     public PageInfo<Admin> selectAllAdmins(Integer page, Integer limit) {
        PageHelper.startPage(page,9);
        List<Admin> admins =  adminMapper.selectAll();
+       for (Admin admin : admins) {
+            admin.setPassword("****");
+       }
        com.github.pagehelper.PageInfo<Admin> pages = new com.github.pagehelper.PageInfo<>(admins);
        PageInfo<Admin> info = new PageInfo<>();
        info.setPage(page);

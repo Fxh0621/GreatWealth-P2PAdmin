@@ -50,7 +50,9 @@
           <ul class="layui-nav layui-nav-tree"  lay-filter="test">
             <li class="layui-nav-item layui-this"><a class="layui-this" href="html/adminIndex.jsp" target="zhuti">首页</a></li>
             <li class="layui-nav-item"><a href="html/adminBorrow.jsp" target="zhuti">借款详情</a></li>
+            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/viewAllBorrowTypes" target="zhuti">借款类型</a></li>
             <li class="layui-nav-item"><a href="html/adminInvest.jsp" target="zhuti">投资详情</a></li>
+            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/viewInvestTypes" target="zhuti">投资类型</a></li>
             <li class="layui-nav-item"><a href="html/adminUser.jsp" target="zhuti">用户详情</a></li>
             <li class="layui-nav-item"><a href="html/adminPower.jsp" target="zhuti">权限管理</a></li>
           </ul>

@@ -39,7 +39,7 @@
     <div class="center">
        <p style="font-size: 25px;font-weight: bolder;color: black;text-align: center;position: relative;top: 20px;">宏量财富后台管理系统</p>
 
-       <form action="${pageContext.request.contextPath}/login" style="margin-top: 60px;margin-left: auto;margin-right: auto;">
+       <form action="${pageContext.request.contextPath}/login" style="margin-top: 60px;margin-left: auto;margin-right: auto;" method="post">
            <span style="color: red;font-size: 16px;width: 300px;height: 50px;display: inline-block;margin-left: 140px">${message}</span><br>
            <span>用户名：</span>
            <input type="text" style="width: 300px;height: 30px;border-radius: 3px;" name="username"><br>
